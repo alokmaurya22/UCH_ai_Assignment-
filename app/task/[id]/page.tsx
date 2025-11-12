@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { mockTasks } from '@/data/mockTasks';
 import { Comment } from '@/types/comment';
+import { getPriorityColor } from '@/lib/utils';
 
 export default function TaskDetailPage({ params }: { params: { id: string } }) {
   const router = useRouter();
@@ -30,15 +31,8 @@ export default function TaskDetailPage({ params }: { params: { id: string } }) {
   const [newComment, setNewComment] = useState('');
 
   if (!task) {
-    return <div className="text-white p-6">Task not found</div>;
+    return <div className="text-white p-6 bg-[#0a0b0f] min-h-screen">Task not found</div>;
   }
-
-  // Priority color mapping
-  const priorityColors = {
-    Low: 'bg-green-500/20 text-green-400',
-    Medium: 'bg-yellow-500/20 text-yellow-400',
-    High: 'bg-red-500/20 text-red-400'
-  };
 
   // Handle comment submission
   const handleAddComment = () => {
@@ -77,7 +71,7 @@ export default function TaskDetailPage({ params }: { params: { id: string } }) {
               <h1 className="text-2xl font-semibold text-white mb-2">{task.title}</h1>
               <p className="text-gray-400 leading-relaxed">{task.description}</p>
             </div>
-            <span className={`text-xs px-3 py-1.5 rounded-md font-medium ${priorityColors[task.priority]}`}>
+            <span className={`text-xs px-3 py-1.5 rounded-md font-medium ${getPriorityColor(task.priority)}`}>
               {task.priority}
             </span>
           </div>

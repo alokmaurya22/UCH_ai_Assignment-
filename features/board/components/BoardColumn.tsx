@@ -2,6 +2,7 @@ import { Droppable, Draggable } from '@hello-pangea/dnd';
 import { Status, Task } from '@/types/task';
 import TaskCard from '@/components/TaskCard';
 import EmptyState from '@/components/EmptyState';
+import { getColumnHeaderColor } from '@/lib/utils';
 
 interface BoardColumnProps {
   status: Status;
@@ -10,22 +11,13 @@ interface BoardColumnProps {
 }
 
 export default function BoardColumn({ status, tasks, onTaskClick }: BoardColumnProps) {
-  // Column header color based on status
-  const getHeaderColor = () => {
-    switch(status) {
-      case 'To-Do List': return 'bg-blue-500';
-      case 'In Progress': return 'bg-blue-500';
-      case 'Not Started': return 'bg-orange-500';
-      default: return 'bg-gray-500';
-    }
-  };
 
   return (
     <div className="bg-[#13151c] rounded-xl p-4 min-w-[340px] max-w-[340px] border border-gray-800/50">
       {/* Column header */}
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
-          <div className={`w-2.5 h-2.5 rounded-full ${getHeaderColor()}`}></div>
+          <div className={`w-2.5 h-2.5 rounded-full ${getColumnHeaderColor(status)}`}></div>
           <h2 className="text-white font-medium text-sm">{status}</h2>
           <span className="bg-blue-500/20 text-blue-400 text-xs px-2 py-0.5 rounded-md font-medium">
             {tasks.length}

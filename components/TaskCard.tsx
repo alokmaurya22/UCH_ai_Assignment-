@@ -1,30 +1,17 @@
 import { Task } from '@/types/task';
+import { getPriorityColor, getStatusColor } from '@/lib/utils';
 
 interface TaskCardProps {
   task: Task;
 }
 
 export default function TaskCard({ task }: TaskCardProps) {
-  // Priority color mapping
-  const priorityColors = {
-    Low: 'bg-green-500/20 text-green-400',
-    Medium: 'bg-yellow-500/20 text-yellow-400',
-    High: 'bg-red-500/20 text-red-400'
-  };
-
-  // Status badge color
-  const statusColors = {
-    'Not Started': 'bg-orange-500/20 text-orange-400',
-    'To-Do List': 'bg-blue-500/20 text-blue-400',
-    'In Progress': 'bg-blue-500/20 text-blue-400',
-    'Completed': 'bg-green-500/20 text-green-400'
-  };
 
   return (
     <div className="bg-[#1a1d29] rounded-xl p-4 border border-gray-800/50 hover:border-gray-700 hover:shadow-xl hover:shadow-blue-500/5 transition-all duration-200 cursor-pointer group">
       {/* Status badge */}
       <div className="flex items-center justify-between mb-3">
-        <span className={`text-xs px-2.5 py-1 rounded-md font-medium ${statusColors[task.status]}`}>
+        <span className={`text-xs px-2.5 py-1 rounded-md font-medium ${getStatusColor(task.status)}`}>
           {task.status}
         </span>
         <button className="text-gray-500 hover:text-white transition-colors opacity-0 group-hover:opacity-100">
@@ -58,7 +45,7 @@ export default function TaskCard({ task }: TaskCardProps) {
           </svg>
           {task.dueDate}
         </div>
-        <span className={`text-xs px-2.5 py-1 rounded-md font-medium ${priorityColors[task.priority]}`}>
+        <span className={`text-xs px-2.5 py-1 rounded-md font-medium ${getPriorityColor(task.priority)}`}>
           {task.priority}
         </span>
       </div>
