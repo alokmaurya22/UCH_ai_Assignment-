@@ -40,12 +40,12 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen p-6">
+    <div className="min-h-screen p-6 bg-[#0a0b0f]">
       <BoardHeader />
 
       {/* Board columns with drag and drop */}
       <DragDropContext onDragEnd={handleDragEnd}>
-        <div className="flex gap-4 overflow-x-auto pb-4">
+        <div className="flex gap-5 overflow-x-auto pb-4">
           {statuses.map(status => (
             <BoardColumn
               key={status}
