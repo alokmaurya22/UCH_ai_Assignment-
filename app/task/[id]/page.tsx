@@ -57,7 +57,7 @@ export default function TaskDetailPage({ params }: { params: { id: string } }) {
   };
 
   return (
-    <div className="min-h-screen p-6">
+    <div className="min-h-screen p-6 bg-[#0a0b0f]">
       {/* Back button */}
       <button 
         onClick={() => router.back()}
@@ -71,44 +71,44 @@ export default function TaskDetailPage({ params }: { params: { id: string } }) {
 
       <div className="max-w-4xl mx-auto">
         {/* Task header */}
-        <div className="bg-[#1a1d29] rounded-lg p-6 mb-6 border border-gray-800">
+        <div className="bg-[#13151c] rounded-xl p-6 mb-6 border border-gray-800/50">
           <div className="flex items-start justify-between mb-4">
             <div>
               <h1 className="text-2xl font-semibold text-white mb-2">{task.title}</h1>
-              <p className="text-gray-400">{task.description}</p>
+              <p className="text-gray-400 leading-relaxed">{task.description}</p>
             </div>
-            <span className={`text-xs px-3 py-1 rounded ${priorityColors[task.priority]}`}>
+            <span className={`text-xs px-3 py-1.5 rounded-md font-medium ${priorityColors[task.priority]}`}>
               {task.priority}
             </span>
           </div>
 
           {/* Task metadata */}
-          <div className="grid grid-cols-3 gap-4 mt-6 pt-6 border-t border-gray-700">
+          <div className="grid grid-cols-3 gap-6 mt-6 pt-6 border-t border-gray-800/50">
             <div>
-              <p className="text-gray-400 text-sm mb-2">Status</p>
-              <p className="text-white">{task.status}</p>
+              <p className="text-gray-500 text-sm mb-2">Status</p>
+              <p className="text-white font-medium">{task.status}</p>
             </div>
             <div>
-              <p className="text-gray-400 text-sm mb-2">Due Date</p>
-              <p className="text-white">{task.dueDate}</p>
+              <p className="text-gray-500 text-sm mb-2">Due Date</p>
+              <p className="text-white font-medium">{task.dueDate}</p>
             </div>
             <div>
-              <p className="text-gray-400 text-sm mb-2">Assignee</p>
+              <p className="text-gray-500 text-sm mb-2">Assignee</p>
               <div className="flex items-center gap-2">
                 <img 
                   src={task.assignee.avatar} 
                   alt={task.assignee.name}
-                  className="w-6 h-6 rounded-full"
+                  className="w-7 h-7 rounded-full ring-2 ring-gray-700"
                 />
-                <span className="text-white">{task.assignee.name}</span>
+                <span className="text-white font-medium">{task.assignee.name}</span>
               </div>
             </div>
           </div>
         </div>
 
         {/* Comments section */}
-        <div className="bg-[#1a1d29] rounded-lg p-6 border border-gray-800">
-          <h2 className="text-xl font-semibold text-white mb-4">
+        <div className="bg-[#13151c] rounded-xl p-6 border border-gray-800/50">
+          <h2 className="text-xl font-semibold text-white mb-6">
             Comments ({comments.length})
           </h2>
 
@@ -118,32 +118,32 @@ export default function TaskDetailPage({ params }: { params: { id: string } }) {
               value={newComment}
               onChange={(e) => setNewComment(e.target.value)}
               placeholder="Add a comment..."
-              className="w-full bg-[#0f1117] text-white px-4 py-3 rounded-lg border border-gray-700 focus:outline-none focus:border-gray-600 resize-none"
+              className="w-full bg-[#1a1d29] text-white px-4 py-3 rounded-lg border border-gray-800 focus:outline-none focus:border-gray-700 resize-none placeholder:text-gray-500"
               rows={3}
             />
             <button
               onClick={handleAddComment}
-              className="mt-2 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-colors"
+              className="mt-3 px-5 py-2.5 bg-blue-500 hover:bg-blue-600 text-white text-sm font-medium rounded-lg transition-colors"
             >
               Add Comment
             </button>
           </div>
 
           {/* Comments list */}
-          <div className="space-y-4">
+          <div className="space-y-5">
             {comments.map(comment => (
-              <div key={comment.id} className="flex gap-3">
+              <div key={comment.id} className="flex gap-3 p-4 bg-[#1a1d29] rounded-lg border border-gray-800/50">
                 <img 
                   src={comment.avatar} 
                   alt={comment.author}
-                  className="w-10 h-10 rounded-full flex-shrink-0"
+                  className="w-10 h-10 rounded-full flex-shrink-0 ring-2 ring-gray-700"
                 />
                 <div className="flex-1">
-                  <div className="flex items-center gap-2 mb-1">
+                  <div className="flex items-center gap-2 mb-2">
                     <span className="text-white font-medium">{comment.author}</span>
                     <span className="text-gray-500 text-sm">{comment.timestamp}</span>
                   </div>
-                  <p className="text-gray-300">{comment.content}</p>
+                  <p className="text-gray-300 leading-relaxed">{comment.content}</p>
                 </div>
               </div>
             ))}
