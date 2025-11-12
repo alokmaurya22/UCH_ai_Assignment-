@@ -49,8 +49,8 @@ export default function Column({ title, tasks, count }: ColumnProps) {
         </div>
       </div>
 
-      {/* Task cards */}
-      <div className="space-y-3">
+      {/* Task cards with scroll */}
+      <div className="space-y-3 max-h-[calc(100vh-250px)] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-transparent">
         {tasks.map(task => (
           <TaskCard key={task.id} task={task} />
         ))}

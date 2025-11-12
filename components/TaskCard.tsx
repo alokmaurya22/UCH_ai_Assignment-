@@ -21,7 +21,7 @@ export default function TaskCard({ task }: TaskCardProps) {
   };
 
   return (
-    <div className="bg-[#1a1d29] rounded-lg p-4 mb-3 border border-gray-800">
+    <div className="bg-[#1a1d29] rounded-lg p-4 mb-3 border border-gray-800 hover:border-gray-600 hover:shadow-lg hover:shadow-blue-500/10 transition-all duration-300 cursor-pointer">
       {/* Status badge */}
       <div className="flex items-center justify-between mb-3">
         <span className={`text-xs px-2 py-1 rounded ${statusColors[task.status]}`}>
