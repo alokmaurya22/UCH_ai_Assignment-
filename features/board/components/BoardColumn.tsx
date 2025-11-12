@@ -1,6 +1,7 @@
 import { Droppable, Draggable } from '@hello-pangea/dnd';
 import { Status, Task } from '@/types/task';
 import TaskCard from '@/components/TaskCard';
+import EmptyState from '@/components/EmptyState';
 
 interface BoardColumnProps {
   status: Status;
@@ -50,25 +51,31 @@ export default function BoardColumn({ status, tasks, onTaskClick }: BoardColumnP
           <div
             ref={provided.innerRef}
             {...provided.droppableProps}
-            className={`space-y-3 max-h-[calc(100vh-250px)] overflow-y-auto pr-1 ${
+            className={`min-h-[200px] max-h-[calc(100vh-250px)] overflow-y-auto pr-1 ${
               snapshot.isDraggingOver ? 'bg-blue-500/5 rounded-lg p-2' : ''
             }`}
           >
-            {tasks.map((task, index) => (
-              <Draggable key={task.id} draggableId={task.id} index={index}>
-                {(provided, snapshot) => (
-                  <div
-                    ref={provided.innerRef}
-                    {...provided.draggableProps}
-                    {...provided.dragHandleProps}
-                    className={snapshot.isDragging ? 'opacity-60 rotate-2' : ''}
-                    onClick={() => onTaskClick(task.id)}
-                  >
-                    <TaskCard task={task} />
-                  </div>
-                )}
-              </Draggable>
-            ))}
+            {tasks.length === 0 ? (
+              <EmptyState message="No tasks yet" />
+            ) : (
+              <div className="space-y-3">
+                {tasks.map((task, index) => (
+                  <Draggable key={task.id} draggableId={task.id} index={index}>
+                    {(provided, snapshot) => (
+                      <div
+                        ref={provided.innerRef}
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                        className={snapshot.isDragging ? 'opacity-60 rotate-2' : ''}
+                        onClick={() => onTaskClick(task.id)}
+                      >
+                        <TaskCard task={task} />
+                      </div>
+                    )}
+                  </Draggable>
+                ))}
+              </div>
+            )}
             {provided.placeholder}
           </div>
         )}
