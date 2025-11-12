@@ -1,14 +1,15 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, use } from 'react';
 import { useRouter } from 'next/navigation';
 import { mockTasks } from '@/data/mockTasks';
 import { Comment } from '@/types/comment';
 import { getPriorityColor } from '@/lib/utils';
 
-export default function TaskDetailPage({ params }: { params: { id: string } }) {
+export default function TaskDetailPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = use(params);
   const router = useRouter();
-  const task = mockTasks.find(t => t.id === params.id);
+  const task = mockTasks.find(t => t.id === id);
   
   // Local state for comments
   const [comments, setComments] = useState<Comment[]>([
